@@ -1,0 +1,34 @@
+# Write a function that takes a list of numbers, a starting base b1 and a target base b2 and interprets the list as a number in base b1
+# and converts it into a number in base b2 (in the form of a list-of-digits).
+
+import string
+
+def ex_2(L1,b1,b2):
+    L2=[]
+    for i in range(1,len(L1)+1):
+        while x!=0:                             #ha jo akkor az uj szamrendszerbe atvaltom
+            szam=''
+            y=x%b2
+            szam+=y
+            x=x//b2
+        joszam=''
+        for k in range(len(szam),2,-1):        #mivel a maradékokat visszafelé kell olvasni,ezért megforditom a szamot
+            joszam+=szam[k]
+            joszam=int(joszam)
+        L2.append(joszam)                 #végul az uj szamrendszerbeli számot hozzáadom az uj listához
+    return L2
+
+
+
+
+# main
+
+L1=[1234,43210]
+b1=5
+b2=3
+for i in (0, len(L1)):  # beolvassa a lista szamait
+    for ch in L1[i]:  # megvizsgálja hogy a megadott szamrendszerben van e
+        if ch >= b1:
+            print('Nem jó számot adott meg!')
+        else:
+            print(ex_2(L1,b1,b2))
