@@ -1,0 +1,32 @@
+# Write function that translates a text to Pig Latin and back.
+# English is translated to Pig Latin by taking the first letter of every word, moving it to the end of the word and adding ‘ay’.
+# “The quick brown fox” becomes “Hetay uickqay rownbay oxfay”.
+import string
+
+def ex_4(n):
+    m=""
+    n=n.split(" ")
+    for i in range(0,len(n)):
+        x=n[i]
+        # print(x)
+        if x[-1:-3:-1]=='ya':
+            x=x[0:len(x)-2]
+            y=x[-1]
+            # y=y.upper()
+            x=x[0:len(x)-1]
+            m+=y+x+' '
+        else:
+            y=x[0]
+            y=y.lower()
+            x=x[1:len(x)]
+            m+=x+y+'ay'+' '
+    return m.capitalize()
+
+
+
+
+
+
+# main
+n=input('Adja meg a szöveget!')
+print(ex_4(n))
