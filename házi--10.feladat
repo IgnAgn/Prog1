@@ -1,0 +1,22 @@
+# 2520 is the smallest number that can be divided by each of the numbers
+# from 1 to 10 without any remainder. What is the smallest positive number
+# that is evenly divisible by all of the numbers from 1 to 20?
+
+import math
+
+check_list=[11,13,14,16,17,18,19,20]            #a többi számmal nem kell megvizsgálnom, hogy osztható-e, mert pl a 20 osztható:2,4,10...
+# check_list=range(1,11)
+
+def find_solution(step):
+    for num in range(step,math.factorial(step)+1,step):   #20-szal osztható, ezért elég 20-tól kezdeni és 20-as lépéssel haladni.
+        if all(num%n==0 for n in check_list):       #a check_list elemeit végigveszem és ha mind osztója a számnak, akkor megvan a megoldás
+            return num
+    return None
+
+
+solution=find_solution(20)
+if solution is None:                #ha a függvénynek van eredménye, akkor visszaadom a számot, ha nincs akkor hibaüzenet jelenik meg.
+    print("No answer found.")
+else:
+    print('answer:',solution)
+
