@@ -1,52 +1,53 @@
 # Write a function that takes a list of numbers, a starting base b1 and a target base b2 and interprets the list as a number in base b1
 # and converts it into a number in base b2 (in the form of a list-of-digits).
 
-def fromBase10(L1,b1,b2):
+def fromBase10(L1,b1,b2):          #a függvény 10-es számredszerből váltja át a lista elemeit a b2 számrendszerbe
     L2=[]
     for n in L1:
-        if n==0:
-            print(0)
+        if n==0:                   #ha a kapott szám 0 akkor nem történik a számmal semmilyen változás
+            L2.append(n)
+            continue
         digits=[]
         while n:
-            digits.append(n%b2)
-            n//=b2
-        l=digits[::-1]
+            digits.append(n%b2)    #a számot elosztom az új számrendszerrel, és a kapott maradékot egy üres listába mentem
+            n//=b2                 # maradék nélküli osztással megkapom a kovetkező számot melyet majd el kell osztanom a b2-vel
+        l=digits[::-1]             #a maradékokat visszafelé olvasva megkapom az új számrendszerben a számot(lista)
         s=''
         for i in l:
-            s+=str(i)
+            s+=str(i)             #a számjegyekből egy int típusú számot csinálok és hozzáfűzöm az eredménylistához
         L2.append(int(s))
     return L2
 
-def toBase10(L1,b1,b2):
+def toBase10(L1,b1,b2):         #a függvény 10-es számrendszerbe váltja át a számokat a megadott számrendszerből
     L2=[]
-    for num in L1:
+    for num in L1:              #sorraveszem a kapott lista számait
         n=0
-        for d in str(num):
+        for d in str(num):      #sorraveszem a szám számjegyeit
             d=int(d)
-            n=b1*n+d
+            n=b1*n+d           #a képlet alapján megkapom a szám 10-es számrendszer beli értékét,majd hozzáfűzöm az eredménylistához
         L2.append(n)
     return L2
 
 
 
 
-L1=[1234,43210]
+L1=[1234,43210,0,1222]           #a kapott paraméterek
 b1=5
 b2=3
 
 def main(L1,b1,b2):
-    for i in range(0,len(L1)):
+    for i in range(0,len(L1)):                    #megvizsgálom, hogy a megadott szám megfelel-e a kiindulási számrendszernek
         n=str(L1[i])
         for j in range(0,len(n)):
             if int(n[j])>=b1:
                 print('Nem jó számot adott meg')
                 return None
-    if b1 == 10:
+    if b1 == 10:                                   #ha a kiindulási számrendszerem a 10-es, akkor meghovom a fromBase10 függvényemet
         print(fromBase10(L1, b1, b2))
-    elif b2 == 10:
+    elif b2 == 10:                                 #ha a 10-es számrendszerbe kell átírni a lista elemeit, akkor meghivom a toBase10 függvényt
         print(toBase10(L1, b1, b2))
     else:
-        L1 = toBase10(L1, b1, b2)
-        print(fromBase10(L1, b1, b2))
+        L1 = toBase10(L1, b1, b2)                 #más esetben először a függvényem segítségével átváltom 10-es számrendszerbe
+        print(fromBase10(L1, b1, b2))             # aztán pedig átváltom a kért számrendszerbe és kiíratom a kapott listát
 
 main(L1,b1,b2)
